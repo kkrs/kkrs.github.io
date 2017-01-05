@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>notify</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.2.3/css/bulma.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300" rel="stylesheet">
+    <link rel="stylesheet" href="/notify/style.css"/>
+    <link rel="stylesheet" href="/style.css"/>
+  </head>
+  <body>
+    <div class="container is-fluid">
+      <div class="header">
+        <nav class="nav">
+          <div class="nav-left"> <a class="nav-item is-brand" href="#"> notify </a> </div>
+          <div class="nav-right nav-menu">
+            <span class="nav-item">
+              <a class="button" >
+                <span class="icon"> <i class="fa fa-sign-out"></i> </span> <span> Logout </span>
+              </a>
+            </span>
+          </div>
+        </nav>
+      </div>
+      <!-- icon padding adds space, if margin-top isn't 0 puts too much space between header and hr -->
+      <hr style="margin-top: 0px"> 
+      <div class="is-fluid columns">
+        <div id="menu" class="column is-2">
+          <aside class="menu">
+            <p class="menu-label">Main</p>
+            <ul class="menu-list">
+              <li>
+               <a class="is-active" href="#">Incidents</a>
+               <ul>
+                 <li><a href="#">Open</a></li>
+                 <li><a href="#">Acknowledged</a></li>
+                 <li><a href="#">Resolved</a></li>
+                 <li><a href="#">All</a></li>
+               </ul>
+              </li>
+              <li><a href="#">Event Log</a></li>
+            </ul>
+            <p class="menu-label">Configuration</p>
+            <ul class="menu-list">
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Escalation Policies</a></li>
+              <li><a href="#">Schedules</a></li>
+              <li><a href="#">Users</a></li>
+            </ul>
+          </aside>
+        </div>
+        <div id="list" class="column is-4">
+            <div>
+                <div style="padding-top: 6px">
+                    <div style="font-size: 16px; line-height: 21px">API gateway unavailable</div>
+                    <div style="12px; line-height: 17px; margin-top: 3px"> ProdEng </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; line-height: 17px; margin-top: 3px">
+                      <div>Karthik Krishnamurthy</div> <div>9:41 Dec 19 2016</div>
+                    </div>
+                </div>
+                <div style="padding-top: 6px">
+                  <div style="font-size: 16px; line-height: 23px">message latency > 500ms</div>
+                  <div style="12px; line-height: 17px; margin-top: 3px"> Platforms </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 12px; line-height: 17px; margin-top: 3px">
+                    <div>Karthik Krishnamurthy</div> <div>9:41 Dec 19 2016</div>
+                  </div>
+                </div>
+                <div style="padding-top: 6px">
+                  <div style="font-size: 16px; line-height: 23px">smtp00 bounce rate > 100/s</div>
+                  <div style="12px; line-height: 17px; margin-top: 3px"> Corp </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 12px; line-height: 17px; margin-top: 3px">
+                    <div>Karthik Krishnamurthy</div> <div>9:41 Dec 19 2016</div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div id="details" class="column">
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+            <a class="is-brand" href="#"> notify </a> is licensed under
+            <a href="https://www.apache.org/licenses/LICENSE-2.0"> Apache 2.0 </a>
+            <span style="padding: 0 3px"> &#8212;</span> © 2016 Karthik Krishnamurthy
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
