@@ -1,0 +1,73 @@
+/* #0fa8e2, #a0a1d3, #34b783 */
+
+/* body div.container with 100% height pushes the footer just below the screen */
+html, body, body div.container {
+    height: 100%;
+}
+
+body {
+    font-family: "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #fff;
+}
+
+#menu, #list {
+    border-right: 1px solid #dbdbdb;
+}
+
+#list .list-column-checkbox {
+    width: 20px; /* force checkbox to take up less space */
+}
+
+.container > .header > .nav > .nav-left > .nav-item:first-child {
+    padding-left: 0;
+}
+
+.container > .header > .nav > .nav-right > .nav-item:last-child {
+    padding-right: 0;
+}
+
+.header .nav-item.is-brand {
+    color: #0FA8E2;
+    font-family: "Raleway", "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 40px;
+    font-weight: 300;
+}
+
+.footer .container a.is-brand {
+    color: #0FA8E2;
+    font-family: "Raleway", "Lato", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    border: none;
+}
+
+/* disable focus completely */
+    *:focus {
+    outline: none;
+}
+
+.menu-list a:hover {
+    background-color: #f5f5f5;
+    color: #036990;
+}
+
+.nav-item a, a.nav-item {
+    color: #7a7a7a;
+}
+
+.nav-item a.button {
+    border-color: #7a7a7a;
+}
+
+.nav-item a.is-active, .nav-item a:hover, a.nav-item.is-active, a.nav-item:hover {
+    color: #036990;
+}
+
+.nav-item a.button:hover, .nav-item a.button:active {
+    border-color: #036990;
+}
+
+/* active menu-list element does not change */
+.menu-list a.is-active {
+    background-color: #fff;
+    color: #4a4a4a;
+}
