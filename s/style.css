@@ -1,6 +1,6 @@
 html {
     height: 100%;
-    font-size: 14px; // set to 14px because all fonts in bulma is now rem sized
+    font-size: 15px; // set to 15px because all fonts in bulma is now rem sized
 }
 
 body {
@@ -13,9 +13,14 @@ body {
     /* color: rgb(51,51,51)  */ /* alternative slightly darker than rgb(74,74,74) */
 }
 
+/* needed here as well as body */
+.page {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
 header {
-    /* display: block; */
-    z-index: 2; /* keep this on top, because main > div.columns sets margin to -10 */
     border-bottom: 1px solid #dbdbdb;
 }
 
@@ -28,8 +33,7 @@ header nav, footer nav {
     border-color: #7a7a7a;
 }
 
-/* forces color not to change on :hover */
-.navbar-brand .navbar-item {
+.navbar-brand a.navbar-item {
     color: #0FA8E2;
     font-family: "Raleway", "Lato", "Open Sans", Helvetica, Arial, sans-serif;
     font-size: 40px;
@@ -37,14 +41,23 @@ header nav, footer nav {
     padding-left: 0; /* override bulma */
 }
 
+/* override bulma - forces color not to change on :hover */
+.navbar-brand a.navbar-item:hover {
+    background-color: #fff;
+}
+
 main .menu {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 }
 
 main {
-    flex-grow: 1;
     display: flex;
+    flex-grow: 1;
+    /* override bulma - collapsing margin with header, without overflow header bottom margin gets
+     * hidden because of child component 'columns' negative margin.
+     */
+    overflow: auto;
 }
 
 #main {
@@ -52,7 +65,7 @@ main {
 }
 
 #menu {
-    background-color: #f1f1f1;
+    background-color: #f7f9fa;
     /* override padding set in bulma .column. allows #menu children occupy the whole width */
     padding: 0 0 0 10px;
     border-right: 1px solid #dbdbdb;
@@ -104,8 +117,12 @@ footer .nav-item .is-brand {
     color: #0FA8E2;
 }
 
-#menu {
-    background-color: #f1f1f1;
+.empty {
+    background: #f8f9fa;
+    border-radius: .2rem;
+    color: #727e96;
+    padding: 4rem;
+    text-align: center;
 }
 
 div.list-item, div.list-header {
