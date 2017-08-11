@@ -20,6 +20,20 @@ body {
     flex-grow: 1;
 }
 
+#login {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10rem;
+}
+
+#login-link {
+    margin: 0 5rem;
+    display: flex;
+    flex-directon: row;
+    align-items: center;
+    justify-content: center;
+}
+
 header {
     border-bottom: 1px solid #dbdbdb;
 }
@@ -29,8 +43,13 @@ header nav, footer nav {
     padding-right: 20px;
 }
 
-.navbar-item a.button {
+.button.esc-button {
     border-color: #7a7a7a;
+}
+
+.button.esc-button:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 .navbar-brand a.navbar-item {
