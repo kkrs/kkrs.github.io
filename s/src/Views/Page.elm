@@ -4,19 +4,13 @@ import Views.Menu as Menu
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Navigation
 
-type ActivePage
-    = Incidents
-    | Applications
-    | Schedules
-    | Escalations
-    | Users
-
-viewMain : String -> Html msg
-viewMain activeLink =
+viewMain : Navigation.Location -> Html msg
+viewMain location =
     main_ []
         [ div [ id "main", class "is-fluid columns" ]
-            [ div [ id "menu", class "column is-2" ] [ Menu.view activeLink ]
+            [ div [ id "menu", class "column is-2" ] [ Menu.view location ]
             , div [ id "list", class "column is-4" ] []
             , div [ id "detail", class "column is-6" ] []
             ]
@@ -53,10 +47,10 @@ viewFooter =
             ]
         ]
 
-frame : String -> Html msg
-frame activeLink =
+frame : Navigation.Location -> Html msg
+frame location =
     div [ class "page" ]
         [ viewHeader
-        , viewMain activeLink
+        , viewMain location
         , viewFooter
         ]

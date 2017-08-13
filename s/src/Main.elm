@@ -15,52 +15,11 @@ type Page
     | Users
     | Error
 
-toHref : Page -> String
-toHref page =
-    case page of
-        Home ->
-            ""
-        Incidents ->
-            "#incidents"
-        Applications ->
-            "#applications"
-        Schedules ->
-            "#schedules"
-        EscalationPolicies ->
-            "#escalationPolicies"
-        Users ->
-            "#users"
-        Error ->
-            "#error"
-
-toPage : Navigation.Location -> Page
-toPage location =
-    case location.hash of
-        "" ->
-            Home
-        "#incidents" ->
-            Incidents
-        "#applications" ->
-            Applications
-        "#schedules" ->
-            Schedules
-        "#escalationPolicies" ->
-            EscalationPolicies
-        "#users" ->
-            Users
-        "#error" ->
-            Error
-        _ ->
-            Error
-
-type alias Model =
-    { activeLink : String
-    , currentPage : Page
-    }
+type alias Model = { navigateTo : Navigation.Location }
 
 view : Model -> Html msg
 view model =
-    Page.frame model.activeLink
+    Page.frame model.navigateTo
 
 -- update
 
@@ -71,17 +30,11 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
         UrlChange location ->
-            let
-                new = { model
-                      | currentPage = (toPage location)
-                      , activeLink = location.hash
-                      }
-            in
-                (new, Cmd.none)
+            ({ model | navigateTo = location}, Cmd.none)
 
 init : Navigation.Location -> (Model, Cmd msg)
 init location =
-    (Model "#incidents" (toPage location), Cmd.none)
+    (Model location, Cmd.none)
 
 main =
     Navigation.program UrlChange
@@ -90,11 +43,3 @@ main =
         , update = update
         , subscriptions = (\_ -> Sub.none)
         }
-
-    {-
-    Html.beginnerProgram
-        { model = Model Menu.initialModel Incidents
-        , view = view
-        , update = update
-        }
-    -}

@@ -2,33 +2,48 @@ module Views.Menu exposing (view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Navigation
 
-type alias MenuItem =
-    { text : String
-    , link : String
-    }
+type Item
+    = Incidents
+    | Applications
+    | Schedules
+    | EscalationPolicies
+    | Users
 
-menuItems : List MenuItem
-menuItems =
-    [ MenuItem "Incidents" "#incidents"
-    , MenuItem "Applications" "#applications"
-    , MenuItem "Schedules" "#schedules"
-    , MenuItem "Escalation Polciies" "#escalationPolicies"
-    , MenuItem "Users" "#users"
-    ]
+toRepresentation : Item -> (String, String)
+toRepresentation item =
+    case item of
+        Incidents           -> ("Incidents", "#incidents")
+        Applications        -> ("Applications", "#applications")
+        Schedules           -> ("Schedules", "#schedules")
+        EscalationPolicies  -> ("EscalationPolicies", "#escalationPolicies")
+        Users               -> ("Users", "#users")
 
-renderItem : String -> MenuItem -> Html msg
-renderItem activeLink item =
-    li [] [ a [ href item.link
-              , classList [ ("is-active", item.link == activeLink) ]
-              ]
-              [ text item.text ]
+menu : List (String, String)
+menu = 
+    List.map toRepresentation [ Incidents, Applications, Schedules, EscalationPolicies, Users ]
+
+toItem : Navigation.Location -> Maybe Item
+toItem location =
+    case location.hash of
+        "#incidents"            -> Just Incidents
+        "#applications"         -> Just Applications
+        "#schedules"            -> Just Schedules
+        "#escalationPolicies"   -> Just EscalationPolicies
+        "#users"                -> Just Users
+        _                       -> Nothing
+
+renderItem : Navigation.Location -> (String, String) -> Html msg
+renderItem location (txt, link) =
+    li [] [ a [ href link, classList [ ("is-active", link == location.hash) ] ]
+              [ text txt ]
           ]
 
-render : String -> List (Html msg)
-render activeLink =
-    List.map (renderItem activeLink) menuItems
+render : Navigation.Location -> List (Html msg)
+render location =
+    List.map (renderItem location) menu
 
-view : String -> Html msg
-view activeLink =
-    div [ class "menu" ] [ ul [ class "menu-list" ] (render activeLink) ]
+view : Navigation.Location -> Html msg
+view location =
+    div [ class "menu" ] [ ul [ class "menu-list" ] (render location) ]
