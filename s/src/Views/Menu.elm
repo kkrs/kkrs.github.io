@@ -1,49 +1,70 @@
-module Views.Menu exposing (view)
+module Views.Menu exposing (Item(..), view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Navigation
+import Route exposing (Route)
 
 type Item
     = Incidents
+    {-
     | Applications
     | Schedules
     | EscalationPolicies
+    -}
     | Users
 
-toRepresentation : Item -> (String, String)
+toRepresentation : Item -> (Item, String, String)
 toRepresentation item =
     case item of
-        Incidents           -> ("Incidents", "#incidents")
-        Applications        -> ("Applications", "#applications")
-        Schedules           -> ("Schedules", "#schedules")
-        EscalationPolicies  -> ("EscalationPolicies", "#escalationPolicies")
-        Users               -> ("Users", "#users")
+        Incidents           -> (Incidents, "Incidents", (Route.toHref Route.Incidents))
+        {-
+        Applications        -> (Applications, "Applications", "#applications")
+        Schedules           -> (Schedules, "Schedules", "#schedules")
+        EscalationPolicies  -> (EscalationPolicies, "EscalationPolicies", "#escalationPolicies")
+        -}
+        Users               -> (Users, "Users", (Route.toHref Route.Users))
 
-menu : List (String, String)
+menu : List (Item, String, String)
 menu = 
-    List.map toRepresentation [ Incidents, Applications, Schedules, EscalationPolicies, Users ]
+    List.map toRepresentation [ Incidents
+                              {-
+                              , Applications
+                              , Schedules
+                              , EscalationPolicies
+                              -}
+                              , Users
+                              ]
 
-toItem : Navigation.Location -> Maybe Item
-toItem location =
-    case location.hash of
-        "#incidents"            -> Just Incidents
-        "#applications"         -> Just Applications
-        "#schedules"            -> Just Schedules
-        "#escalationPolicies"   -> Just EscalationPolicies
-        "#users"                -> Just Users
+{-
+toItem : Route -> Maybe Item
+toItem route =
+    case route of
+        Route.Incidents         -> Just Incidents
+        Route.Applications      -> Just Applications
+        Route.Schedules         -> Just Schedules
+        Route.EsclationPolicies -> Just EscalationPolicies
+        Route.Users             -> Just Users
         _                       -> Nothing
+-}
 
-renderItem : Navigation.Location -> (String, String) -> Html msg
-renderItem location (txt, link) =
-    li [] [ a [ href link, classList [ ("is-active", link == location.hash) ] ]
-              [ text txt ]
-          ]
+renderItem : Maybe Item -> (Item, String, String) -> Html msg
+renderItem maybeActiveItem (item, txt, link) =
+    let
+        isActive =
+            case maybeActiveItem of
+                Nothing ->
+                    False
+                Just activeItem ->
+                    activeItem == item
+    in
+        li [] [ a [ href link, classList [ ("is-active", isActive) ] ]
+                  [ text txt ]
+              ]
 
-render : Navigation.Location -> List (Html msg)
-render location =
-    List.map (renderItem location) menu
+render : Maybe Item -> List (Html msg)
+render activeItem =
+    List.map (renderItem activeItem) menu
 
-view : Navigation.Location -> Html msg
-view location =
-    div [ class "menu" ] [ ul [ class "menu-list" ] (render location) ]
+view : Maybe Item -> Html msg
+view activeItem =
+    div [ class "menu" ] [ ul [ class "menu-list" ] (render activeItem) ]
